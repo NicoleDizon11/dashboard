@@ -1,0 +1,126 @@
+<?php
+session_start();
+if (!isset($_SESSION['loggedInUser'])) {
+    header("Location: login.html"); // Redirect to login if not logged in
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: rgb(170, 167, 167);
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .navbar {
+            background-color: rgb(170, 167, 167);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link:hover {
+            color: lightblue;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard -->
+    <div id="dashboard">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" href="#">Dashboard</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php" id="logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h5>Sidebar</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <h3 class="nav-link text-secondary"><strong><i class="fa fa-home"></i> Home</strong></h3>
+                    </li>
+                    <li class="nav-item">
+                        <h3 class="nav-link text-secondary"><strong><i class="fas fa-user"></i> Profile</strong></h3>
+                    </li>
+                    <li class="nav-item">
+                        <h3 class="nav-link text-secondary"><strong><i class="fas fa-cog"></i> Settings</strong></h3>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <h2 class="fw-bold">Welcome to the Dashboard, <?php echo htmlspecialchars($_SESSION['loggedInUser']); ?>!</h2>
+                <p>This is your dashboard where you can access various sections using the sidebar.</p>
+                <div class="row g-3">
+                    <div class="card mt-5" style="width: 200px;">
+                        <div class="card-img-top">
+                            <img style="width: 100%; height: auto;" src="https://cdn-icons-png.flaticon.com/512/6194/6194029.png" alt="image1">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h5>To-Do List</h5>
+                                <div class="card-text">
+                                    <p>If you want to create your own to-do list.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn btn-info ms-3 me-3 mb-4 rounded-pill" href="todo-list.html">To-Do List</a>
+                    </div>
+                    <div class="card ms-3 mt-5" style="width: 200px;">
+                        <div class="card-img-top">
+                            <img style="width: 100%; height: auto;" src="https://www.freepnglogos.com/uploads/logo-website-png/logo-website-file-globe-icon-svg-wikimedia-commons-21.png" alt="image1">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h5>Visit</h5>
+                                <div class="card-text">
+                                    <p>If you want to visit our website</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn btn-info ms-3 me-3 mb-4 rounded-pill" href="index.html">Website</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
